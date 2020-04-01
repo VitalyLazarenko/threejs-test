@@ -148,6 +148,9 @@ const createPyramid = size => {
 };
 
 const scene = new THREE.Scene();
+var axesHelper = new THREE.AxesHelper(5);
+scene.add(axesHelper);
+
 const camera = new THREE.PerspectiveCamera(
   120,
   window.innerWidth / window.innerHeight,
@@ -159,10 +162,13 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(1000, 840);
 document.getElementById('view').appendChild(renderer.domElement);
 
+const controls = new THREE.OrbitControls(camera, renderer.domElement);
+
 camera.position.z = 9;
 
 function animate() {
   requestAnimationFrame(animate);
+  controls.update();
   renderer.render(scene, camera);
 }
 animate();
