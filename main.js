@@ -9,7 +9,9 @@ const state = {
     minX: -30,
     maxX: 30,
     minY: -17,
-    maxY: 17
+    maxY: 17,
+    minZ: 30,
+    maxZ: -30
   }
 };
 
@@ -95,6 +97,9 @@ const createBox = size => {
   cube.position.y =
     Math.floor(Math.random() * (state.window.maxY - state.window.minY + 1)) +
     state.window.minY;
+  cube.position.z =
+    Math.floor(Math.random() * (state.window.maxZ - state.window.minZ + 1)) +
+    state.window.minZ;
 
   scene.add(cube);
 
@@ -117,6 +122,9 @@ const createSphere = size => {
   sphere.position.y =
     Math.floor(Math.random() * (state.window.maxY - state.window.minY + 1)) +
     state.window.minY;
+  sphere.position.z =
+    Math.floor(Math.random() * (state.window.maxZ - state.window.minZ + 1)) +
+    state.window.minZ;
 
   scene.add(sphere);
   const uuid = sphere.uuid;
@@ -139,6 +147,9 @@ const createPyramid = size => {
   pyramid.position.y =
     Math.floor(Math.random() * (state.window.maxY - state.window.minY + 1)) +
     state.window.minY;
+  pyramid.position.z =
+    Math.floor(Math.random() * (state.window.maxZ - state.window.minZ + 1)) +
+    state.window.minZ;
 
   scene.add(pyramid);
 
@@ -147,24 +158,32 @@ const createPyramid = size => {
   return uuid;
 };
 
+const viewHeight = document.getElementById('view').offsetHeight;
+const viewWidth = document.getElementById('view').offsetWidth;
+
 const scene = new THREE.Scene();
 var axesHelper = new THREE.AxesHelper(5);
 scene.add(axesHelper);
 
 const camera = new THREE.PerspectiveCamera(
-  120,
-  window.innerWidth / window.innerHeight,
+  25,
+  viewWidth / viewHeight,
   0.1,
   1000
 );
 
 const renderer = new THREE.WebGLRenderer();
-renderer.setSize(1000, 840);
+renderer.setSize(viewWidth, viewHeight);
+
+camera.position.z = 120;
+
+// camera.fov =
+//   Math.atan(viewHeight / 2 / camera.position.z) * 2 * THREE.Math.RAD2DEG;
+// camera.aspect = viewWidth / viewHeight;
+
 document.getElementById('view').appendChild(renderer.domElement);
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement);
-
-camera.position.z = 9;
 
 function animate() {
   requestAnimationFrame(animate);
