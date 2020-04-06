@@ -111,7 +111,7 @@ const createBox = size => {
 const createSphere = size => {
   const geometry = new THREE.SphereGeometry(size, 32, 32);
   const material = new THREE.MeshBasicMaterial({
-    color: 0xffff00,
+    color: 0x0000ff,
     wireframe: true
   });
   const sphere = new THREE.Mesh(geometry, material);
@@ -135,7 +135,7 @@ const createSphere = size => {
 const createPyramid = size => {
   const geometry = new THREE.CylinderGeometry(0, size, size, 4);
   const material = new THREE.MeshBasicMaterial({
-    color: 0xffff00,
+    color: 0xff0000,
     wireframe: true
   });
 

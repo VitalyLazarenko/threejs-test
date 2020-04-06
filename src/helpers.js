@@ -1,6 +1,6 @@
-function createElements(uuid) {
+function createElements(uuid, idItem) {
   const label = document.createElement('label');
-  label.innerText = uuid;
+  label.textContent = uuid;
   label.className = 'title';
 
   const delButton = document.createElement('button');
@@ -12,6 +12,7 @@ function createElements(uuid) {
   listItem.title = uuid;
   listItem.appendChild(label);
   listItem.appendChild(delButton);
+  listItem.setAttribute('item-id', idItem);
 
   bindEvent(listItem);
 
