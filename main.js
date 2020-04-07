@@ -177,10 +177,6 @@ renderer.setSize(viewWidth, viewHeight);
 
 camera.position.z = 120;
 
-// camera.fov =
-//   Math.atan(viewHeight / 2 / camera.position.z) * 2 * THREE.Math.RAD2DEG;
-// camera.aspect = viewWidth / viewHeight;
-
 document.getElementById('view').appendChild(renderer.domElement);
 
 const controls = new THREE.OrbitControls(camera, renderer.domElement);

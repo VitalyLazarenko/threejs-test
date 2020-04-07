@@ -1,34 +1,32 @@
-import Viewer from "./Viewer";
-import DataStorage from "./Data";
+import Viewer from './Viewer';
+import DataStorage from './DataStorage';
 
 export default class App {
+  constructor(viewerContainer) {
+    // viewer
+    // dataStorage
+    this.viewer = new Viewer(viewerContainer);
+    this.dataStorage = new DataStorage();
+  }
 
-    constructor(viewerContainer) {
-        // viewer
-        // dataStorage
-        this.viewer = new Viewer(viewerContainer);
-        this.dataStorage = new DataStorage();
-    }
+  init() {
+    this.viewer.init();
+    // service.getDataFromServer(() => {
+    //     this.dataStorage.setData();
+    // });
+    // viewer.init( братан, вот тебе данные которые нужно отрисовать, клиент попросил по бырому);
+    // dataStorage.init( братан, вот тебе данные которые нужно сохранить, клиент попросил по бырому);
+    this.setListeners();
+  }
 
-    init() {
-        this.viewer.init();
-        // service.getDataFromServer(() => {
-        //     this.dataStorage.setData();
-        // });
-        // viewer.init( братан, вот тебе данные которые нужно отрисовать, клиент попросил по бырому);
-        // dataStorage.init( братан, вот тебе данные которые нужно сохранить, клиент попросил по бырому);
-        this.setListeners();
-    
-    }
+  setListeners() {
+    // resize();
+    // scroll();
+    // close();
+  }
 
-    setListeners() {
-        // resize();
-        // scroll();
-        // close();
-    }
-
-    destroy() {
-        // dataStorage.saveOnServer();
-        console.log(2);
-    }
+  destroy() {
+    // dataStorage.saveOnServer();
+    console.log(2);
+  }
 }
