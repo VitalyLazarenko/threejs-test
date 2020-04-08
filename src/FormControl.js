@@ -2,55 +2,48 @@ import Viewer from './Viewer';
 import DataStorage from './DataStorage';
 
 export default class FormControl {
-  constructor() {
-    this.figure = document.getElementById('figure');
-    this.range = document.getElementById('range');
-    this.addFigure = document.getElementById('add-figure');
-    this.listItems = document.getElementById('list');
-  }
+	constructor() {
+		this.callbacks = {};
+		this.figure = document.getElementById('figure');
+		this.range = document.getElementById('range');
+		this.addFigure = document.getElementById('add-figure');
+		this.listItems = document.getElementById('list');
+	}
 
-  init() {
-    this.addFigure.addEventListener('click', this.addNewFigure.bind(this));
-  }
+	init() {
+		this.addFigure.addEventListener('click', this.addNewFigure.bind(this));
+	}
 
-  addEventListeners() {
-    // this.addFigure.addEventListener('click', () => {
-    //   console.log('add figure');
-    // });
-  }
+	addEventListeners() {
+		// this.addFigure.addEventListener('click', () => {
+		//   console.log('add figure');
+		// });
+	}
 
-  addNewFigure() {
-    const name = figure.value;
-    const size = range.value;
-    let newFigure = {};
+	addNewFigure() {
+		this.dispatch('addFigureEvent', {
+			name: this.figure.value,
+			size: this.range.value
+		});
+	}
 
-    switch (name) {
-      case 'Box':
-        console.log(name, ' : ', size);
-        newFigure = Viewer.createBox(size); // ?
-        break;
-      case 'Shpere':
-        console.log(name, ' : ', size);
-        newFigure = Viewer.createSphere(size); // ?
-        break;
-      case 'Pyramid':
-        console.log(name, ' : ', size);
-        newFigure = Viewer.createPyramid(size); // ?
-        break;
-      default:
-        alert('Что-то пошло не так! :D');
-        break;
-    }
+	// ---------- EVENT SYSTEM ----------
+	subscribe(eventName, cb) {
+		this.callbacks[eventName] = [];
+		this.callbacks[eventName].push(cb);
+	}
 
-    // console.log(newFigure);
+	dispatch(eventName, props) {
+		if (eventName in this.callbacks) {
+			this.callbacks[eventName].forEach(cb => cb(props));
+		}
+	}
 
-    // listItems.appendChild(Viewer.addListItem(newFigure)); // ?
-    // DataStorage.setData(newFigure); // ?
-  }
+	// ---------- END OF EVENT SYSTEM ----------
 
-  bindEvent(item) {
-    const deleteButton = item.querySelector('button.delete');
+	bindEvent(item) {
+		const deleteButton = item.querySelector('button.delete');
 
-    deleteButton.addEventListener('click', delItem);
-  }
+		deleteButton.addEventListener('click', delItem);
+	}
 }
