@@ -7,13 +7,13 @@ export default class Viewer {
     this.viewerContainer.appendChild(this.renderer.domElement);
 
     this.renderHeight = this.viewerContainer.offsetHeight;
-    this.renderWidth = this.viewerContainer.offserWidth;
+    this.renderWidth = this.viewerContainer.offsetWidth;
 
     this.scene = new THREE.Scene();
-    this.axesHelper = new THREE.AxesHelper(5);
+    this.axesHelper = new THREE.AxesHelper(10);
     this.camera = new THREE.PerspectiveCamera(
       25,
-      viewWidth / viewHeight,
+      this.renderWidth / this.renderHeight,
       0.1,
       1000
     );
@@ -33,6 +33,8 @@ export default class Viewer {
     this.renderer.setSize(this.renderWidth, this.renderHeight); //
     this.camera.position.z = 120; //
     // Is it possible to put this in the constructor?
+
+    console.log(this.renderHeight, this.renderWidth);
 
     this._animate();
   }
@@ -163,11 +165,11 @@ export default class Viewer {
   }
 
   _animate() {
-    this.renderer.render(this.scene, this.camera);
     requestAnimationFrame(() => this._animate());
+    this.renderer.render(this.scene, this.camera);
   }
 
-  draw(figure) {
-    //
-  }
+  //   draw(figure) {
+  //     //
+  //   }
 }

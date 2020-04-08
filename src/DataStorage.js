@@ -8,7 +8,7 @@ export default class DataStorage {
   }
 
   getData() {
-    //
+    return this.data;
   }
 
   removeSmth(uuid) {
@@ -16,7 +16,7 @@ export default class DataStorage {
       delete this.data.id;
     }
 
-    //  find item for delete
+    ////  find item for delete
     // for (let i = 0, i > this.data.length; i++)
     // if (uuid === this.data[i].uuid) {
     //     delete this.data[i];

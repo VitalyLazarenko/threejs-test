@@ -19,24 +19,25 @@ export default class FormContlo {
   addNewFigure() {
     const figureName = figure.value;
     const figureSize = range.value;
+    let newFigure = {};
 
     switch (figureName) {
       case 'Box':
-        let figure = Viewer.createBox(figureSize); // ?
+        newFigure = Viewer.createBox(figureSize); // ?
         break;
       case 'Shpere':
-        let figure = Viewer.createSphere(figureSize); // ?
+        newFigure = Viewer.createSphere(figureSize); // ?
         break;
       case 'Pyramid':
-        let figure = Viewer.createPyramid(figureSize); // ?
+        newFigure = Viewer.createPyramid(figureSize); // ?
         break;
       default:
         alert('Что-то пошло не так! :D');
         break;
     }
 
-    listItems.appendChild(Viewer.addListItem(figure)); // ?
-    DataStorage.setData(figure); // ?
+    listItems.appendChild(Viewer.addListItem(newFigure)); // ?
+    DataStorage.setData(newFigure); // ?
   }
 
   bindEvent(item) {
