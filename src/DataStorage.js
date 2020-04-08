@@ -1,20 +1,22 @@
 export default class DataStorage {
   constructor() {
-    this.data = [];
+    this.figureDataList = [];
   }
 
-  setData(data) {
-    this.data = this.data.push(data);
+  saveListItem(data) {
+    
   }
 
-  getData() {
-    return this.data;
+  getItems() {
+    return this.figureDataList;
   }
 
-  removeSmth(uuid) {
-    if (uuid in this.data) {
-      delete this.data.id;
-    }
+  getItemById(uuid) {
+    // logic for find and return listItem
+  }
+
+  removeListItem(uuid) {
+    // logic of removing figure from dataStorage
 
     ////  find item for delete
     // for (let i = 0, i > this.data.length; i++)

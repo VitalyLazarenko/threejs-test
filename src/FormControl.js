@@ -29,16 +29,17 @@ export default class FormControl {
 
 	// ---------- EVENT SYSTEM ----------
 	subscribe(eventName, cb) {
-		this.callbacks[eventName] = [];
+		if (!this.callbacks[eventName]) {
+			this.callbacks[eventName] = [];
+		}
 		this.callbacks[eventName].push(cb);
 	}
 
-	dispatch(eventName, props) {
+	dispatch(eventName, props = {}) {
 		if (eventName in this.callbacks) {
 			this.callbacks[eventName].forEach(cb => cb(props));
 		}
 	}
-
 	// ---------- END OF EVENT SYSTEM ----------
 
 	bindEvent(item) {

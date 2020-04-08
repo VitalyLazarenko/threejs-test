@@ -32,8 +32,6 @@ export default class Viewer {
     this.scene.add(this.axesHelper); //
     this.renderer.setSize(this.renderWidth, this.renderHeight); //
     this.camera.position.z = 120; //
-    // Is it possible to put this in the constructor?
-
     this._animate();
   }
 
