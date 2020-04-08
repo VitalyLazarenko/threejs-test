@@ -1,7 +1,7 @@
 import Viewer from './Viewer';
 import DataStorage from './DataStorage';
 
-export default class FormContlo {
+export default class FormControl {
   constructor() {
     this.figure = document.getElementById('figure');
     this.range = document.getElementById('range');
@@ -9,40 +9,48 @@ export default class FormContlo {
     this.listItems = document.getElementById('list');
   }
 
+  init() {
+    this.addFigure.addEventListener('click', this.addNewFigure.bind(this));
+  }
+
   addEventListeners() {
-    this.addFigure.addEventListener('click', () => {
-      console.log('add figure');
-    });
-    // this.addFigure.addEventListener('click', this.addNewFigure.bind(this)));
+    // this.addFigure.addEventListener('click', () => {
+    //   console.log('add figure');
+    // });
   }
 
   addNewFigure() {
-    const figureName = figure.value;
-    const figureSize = range.value;
+    const name = figure.value;
+    const size = range.value;
     let newFigure = {};
 
-    switch (figureName) {
+    switch (name) {
       case 'Box':
-        newFigure = Viewer.createBox(figureSize); // ?
+        console.log(name, ' : ', size);
+        newFigure = Viewer.createBox(size); // ?
         break;
       case 'Shpere':
-        newFigure = Viewer.createSphere(figureSize); // ?
+        console.log(name, ' : ', size);
+        newFigure = Viewer.createSphere(size); // ?
         break;
       case 'Pyramid':
-        newFigure = Viewer.createPyramid(figureSize); // ?
+        console.log(name, ' : ', size);
+        newFigure = Viewer.createPyramid(size); // ?
         break;
       default:
         alert('Что-то пошло не так! :D');
         break;
     }
 
-    listItems.appendChild(Viewer.addListItem(newFigure)); // ?
-    DataStorage.setData(newFigure); // ?
+    // console.log(newFigure);
+
+    // listItems.appendChild(Viewer.addListItem(newFigure)); // ?
+    // DataStorage.setData(newFigure); // ?
   }
 
   bindEvent(item) {
     const deleteButton = item.querySelector('button.delete');
 
-    deleteButton.addEventListener('click', Viewer.delItem);
+    deleteButton.addEventListener('click', delItem);
   }
 }

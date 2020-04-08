@@ -1,4 +1,4 @@
-import FormControl from './FormControl';
+// import FormControl from './FormControl';
 
 export default class Viewer {
   constructor(viewerContainer) {
@@ -10,7 +10,7 @@ export default class Viewer {
     this.renderWidth = this.viewerContainer.offsetWidth;
 
     this.scene = new THREE.Scene();
-    this.axesHelper = new THREE.AxesHelper(10);
+    this.axesHelper = new THREE.AxesHelper(15);
     this.camera = new THREE.PerspectiveCamera(
       25,
       this.renderWidth / this.renderHeight,
@@ -34,8 +34,6 @@ export default class Viewer {
     this.camera.position.z = 120; //
     // Is it possible to put this in the constructor?
 
-    console.log(this.renderHeight, this.renderWidth);
-
     this._animate();
   }
 
@@ -54,7 +52,7 @@ export default class Viewer {
     listItem.appendChild(label);
     listItem.appendChild(delButton);
 
-    FormControl.bindEvent(listItem); // ?
+    this.bindEvent(listItem); // ?
 
     return listItem;
   }

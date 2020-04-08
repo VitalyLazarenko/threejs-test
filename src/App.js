@@ -1,5 +1,6 @@
 import Viewer from './Viewer';
 import DataStorage from './DataStorage';
+import FormControl from './FormControl';
 
 export default class App {
   constructor(viewerContainer) {
@@ -7,9 +8,11 @@ export default class App {
     // dataStorage
     this.viewer = new Viewer(viewerContainer);
     this.dataStorage = new DataStorage();
+    this.formControl = new FormControl();
   }
 
   init() {
+    this.formControl.init();
     this.viewer.init();
     // service.getDataFromServer(() => {
     //     this.dataStorage.setData();
