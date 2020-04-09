@@ -1,5 +1,3 @@
-// import FormControl from './FormControl';
-
 export default class Viewer {
   constructor(viewerContainer) {
     this.viewerContainer = viewerContainer;
@@ -35,51 +33,15 @@ export default class Viewer {
     this._animate();
   }
 
-  addListItem(figure) {
-    const label = document.createElement('label');
-    label.textContent = figure.uuid;
-    label.className = 'title';
-
-    const delButton = document.createElement('button');
-    delButton.className = 'delete';
-    delButton.innerText = 'del';
-
-    const listItem = document.createElement('li');
-    listItem.className = 'list-item';
-    listItem.title = figure.uuid;
-    listItem.appendChild(label);
-    listItem.appendChild(delButton);
-
-    this.bindEvent(listItem); // ?
-
-    return listItem;
-  }
-
-  delListItem() {
-    const itemList = this.parentNode;
-    const uuid = itemList.title;
-
-    let allFigure = scene.children;
-
-    let delMesh;
-
-    for (let i = 0; i < allFigure.length; i++) {
-      if (allFigure[i].uuid === uuid) {
-        delMesh = allFigure[i];
-      }
-    }
-
-    scene.remove(delMesh);
-    listItems.removeChild(itemList);
-  }
-
   createBox(size) {
     const geometry = new THREE.BoxGeometry(size, size, size);
     const material = new THREE.MeshBasicMaterial({
       color: 0x00ff00,
       wireframe: true,
     });
+
     const cube = new THREE.Mesh(geometry, material);
+
     cube.position.x =
       Math.floor(
         Math.random() *
@@ -98,7 +60,12 @@ export default class Viewer {
 
     this.scene.add(cube);
 
-    return cube;
+    return {
+      item_id: String(new Date()),
+      uuid: cube.uuid,
+      name: 'Box',
+      size: size,
+    };
   }
 
   createSphere(size) {
@@ -127,7 +94,12 @@ export default class Viewer {
 
     this.scene.add(sphere);
 
-    return sphere;
+    return {
+      item_id: String(new Date()),
+      uuid: sphere.uuid,
+      name: 'sphere',
+      size: size,
+    };
   }
 
   createPyramid(size) {
@@ -157,7 +129,24 @@ export default class Viewer {
 
     this.scene.add(pyramid);
 
-    return pyramid;
+    return {
+      item_id: String(new Date()),
+      uuid: pyramid.uuid,
+      name: 'piramid',
+      size: size,
+    };
+  }
+
+  deleteFigure({ uuid }) {
+    let removeFigure;
+
+    for (let i = 0; i < this.scene.children.length; i++) {
+      if (this.scene.children[i].uuid === uuid) {
+        removeFigure = this.scene.children[i];
+      }
+    }
+
+    this.scene.remove(removeFigure);
   }
 
   _animate() {

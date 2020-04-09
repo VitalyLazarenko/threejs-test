@@ -34,34 +34,39 @@ export default class App {
     // 4. save UUID in DataStorage
 
     this.formControl.subscribe('addFigureEvent', (figureProps) => {
-      const newFigureUUID = this.addNewFigureToViewer(figureProps);
-      this.dataStorage.setData(newFigureUUID);
-      this.formControl.addListItem(newFigureUUID);
+      const newFigure = this.addNewFigureToViewer(figureProps);
+      this.dataStorage.saveItem(newFigure);
+
+      this.formControl.addListItem(newFigure);
+      this.dataStorage.getAllItems();
+    });
+
+    this.formControl.subscribe('removeFigureEvent', (item_id) => {
+      const figure = this.dataStorage.getItemById(item_id);
+
+      this.viewer.deleteFigure(figure);
+      // this.dataStorage.removeItem(figure);
     });
   }
 
-  addNewFigureToViewer(figureProps) {
+  addNewFigureToViewer({ name, size }) {
+    let uuid;
+
     switch (name) {
       case 'Box':
-        console.log(name, ' : ', size);
-        newFigure = this.viewer.createBox(size); // ?
+        uuid = this.viewer.createBox(size);
         break;
       case 'Shpere':
-        console.log(name, ' : ', size);
-        newFigure = this.viewer.createSphere(size); // ?
+        uuid = this.viewer.createSphere(size);
         break;
       case 'Pyramid':
-        console.log(name, ' : ', size);
-        newFigure = this.viewer.createPyramid(size); // ?
+        uuid = this.viewer.createPyramid(size);
         break;
       default:
         alert('Что-то пошло не так! :D');
         break;
     }
-  }
 
-  destroy() {
-    // dataStorage.saveOnServer();
-    console.log(2);
+    return uuid;
   }
 }
