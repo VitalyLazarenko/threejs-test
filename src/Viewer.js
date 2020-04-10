@@ -61,7 +61,7 @@ export default class Viewer {
     this.scene.add(cube);
 
     return {
-      item_id: String(new Date()),
+      item_id: String(Date.now()),
       uuid: cube.uuid,
       name: 'Box',
       size: size,
