@@ -4,17 +4,17 @@ export default class DataStorage {
   }
 
   saveItem(data) {
-    if (data === '') return alert('Нету данных для добавления!');
+    if (data === '') return alert('No data to add!');
 
     this.figureDataList.push(data);
   }
 
   getAllItems() {
-    console.log(this.figureDataList);
+    return this.figureDataList;
   }
 
   getItemById({ item_id }) {
-    if (item_id === '') alert('Какой элемент найти? ');
+    if (item_id === '') alert('Which item to find? ');
 
     // logic for find and return listItem
     for (let i = 0; i < this.figureDataList.length; i++) {
@@ -30,12 +30,5 @@ export default class DataStorage {
         delete this.figureDataList[i];
       }
     }
-
-    // logic of removing figure from dataStorage
-    ////  find item for delete
-    // for (let i = 0, i > this.data.length; i++)
-    // if (uuid === this.data[i].uuid) {
-    //     delete this.data[i];
-    // }
   }
 }

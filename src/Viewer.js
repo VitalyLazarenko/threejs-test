@@ -27,9 +27,9 @@ export default class Viewer {
   }
 
   init() {
-    this.scene.add(this.axesHelper); //
-    this.renderer.setSize(this.renderWidth, this.renderHeight); //
-    this.camera.position.z = 120; //
+    this.scene.add(this.axesHelper);
+    this.renderer.setSize(this.renderWidth, this.renderHeight);
+    this.camera.position.z = 120;
     this._animate();
   }
 
@@ -61,7 +61,7 @@ export default class Viewer {
     this.scene.add(cube);
 
     return {
-      item_id: String(new Date()),
+      item_id: String(Date.now()),
       uuid: cube.uuid,
       name: 'Box',
       size: size,
@@ -95,7 +95,7 @@ export default class Viewer {
     this.scene.add(sphere);
 
     return {
-      item_id: String(new Date()),
+      item_id: String(Date.now()),
       uuid: sphere.uuid,
       name: 'sphere',
       size: size,
@@ -130,7 +130,7 @@ export default class Viewer {
     this.scene.add(pyramid);
 
     return {
-      item_id: String(new Date()),
+      item_id: String(Date.now()),
       uuid: pyramid.uuid,
       name: 'piramid',
       size: size,
@@ -153,8 +153,4 @@ export default class Viewer {
     requestAnimationFrame(() => this._animate());
     this.renderer.render(this.scene, this.camera);
   }
-
-  //   draw(figure) {
-  //     //
-  //   }
 }

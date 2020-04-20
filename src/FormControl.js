@@ -1,6 +1,3 @@
-import Viewer from './Viewer';
-import DataStorage from './DataStorage';
-
 export default class FormControl {
   constructor() {
     this.callbacks = {};
@@ -8,7 +5,6 @@ export default class FormControl {
     this.range = document.getElementById('range');
     this.addFigure = document.getElementById('add-figure');
     this.listItems = document.getElementById('list');
-    // this.deleteButton = document.getElementById('delete');
   }
 
   init() {
@@ -52,19 +48,13 @@ export default class FormControl {
     deleteButton.addEventListener('click', this.delListItem.bind(this));
   }
 
-  delListItem() {
-    document.addEventListener('click', (e) => {
-      const item_id = e.target.attributes[2].value;
-      this.dispatch('removeFigureEvent', { item_id: item_id });
+  delListItem(e) {
+    const item_id = e.target.attributes[2].value;
+    this.dispatch('removeFigureEvent', { item_id: item_id });
 
-      const item = document.getElementById(`${e.target.attributes[2].value}`);
+    const item = document.getElementById(`${e.target.attributes[2].value}`);
 
-      this.listItems.removeChild(item);
-    });
-
-    // this.dispatch('removeFigureEvent', { uuid: uuid });
-
-    // listItems.removeChild(item);
+    this.listItems.removeChild(item);
   }
 
   // ---------- EVENT SYSTEM ----------
