@@ -33,22 +33,7 @@ export default class App {
   }
 
   addNewFigureToViewer({ name, size }) {
-    let newFigure;
-
-    switch (name) {
-      case 'Box':
-        newFigure = this.viewer.createBox(size);
-        break;
-      case 'Shpere':
-        newFigure = this.viewer.createSphere(size);
-        break;
-      case 'Pyramid':
-        newFigure = this.viewer.createPyramid(size);
-        break;
-      default:
-        alert('Something went wrong! :D');
-        break;
-    }
+    let newFigure = this.viewer.createFigure(name, size);
 
     return newFigure;
   }

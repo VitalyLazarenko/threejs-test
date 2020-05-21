@@ -33,6 +33,25 @@ export default class Viewer {
     this._animate();
   }
 
+  createFigure(name, size) {
+    let newFigure;
+    switch (name) {
+      case 'Box':
+        newFigure = this.createBox(size);
+        break;
+      case 'Shpere':
+        newFigure = this.createSphere(size);
+        break;
+      case 'Pyramid':
+        newFigure = this.createPyramid(size);
+        break;
+      default:
+        alert('Something went wrong! :D');
+        break;
+    }
+    return newFigure;
+  }
+
   createBox(size) {
     const geometry = new THREE.BoxGeometry(size, size, size);
     const material = new THREE.MeshBasicMaterial({
