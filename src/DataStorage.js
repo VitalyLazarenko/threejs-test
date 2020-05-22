@@ -16,12 +16,12 @@ export default class DataStorage {
   getItemById({ item_id }) {
     if (item_id === '') alert('Which item to find? ');
 
-    let findItem = this.figureDataList.find((item) => (item.item_id = item_id));
+    let findItem = this.figureDataList.find((item) => item.item_id === item_id);
 
     if (findItem !== '') {
       return findItem;
     } else {
-      alert('Such an element does not exist!');
+      return alert('Such an element does not exist!');
     }
   }
 

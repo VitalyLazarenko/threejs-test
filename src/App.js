@@ -25,6 +25,7 @@ export default class App {
 
     this.formControl.subscribe('removeFigureEvent', (item_id) => {
       const figure = this.dataStorage.getItemById(item_id);
+      console.log(figure);
 
       this.viewer.deleteFigure(figure);
       this.dataStorage.removeItem(figure);
