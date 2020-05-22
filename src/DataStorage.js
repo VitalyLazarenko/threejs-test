@@ -7,6 +7,7 @@ export default class DataStorage {
     if (data === '') return alert('No data to add!');
 
     this.figureDataList.push(data);
+    console.log(this.figureDataList);
   }
 
   getAllItems() {
@@ -21,15 +22,13 @@ export default class DataStorage {
     if (findItem !== '') {
       return findItem;
     } else {
-      return alert('Such an element does not exist!');
+      alert('Such an element does not exist!');
     }
   }
 
   removeItem({ item_id }) {
-    for (let i = 0; i > this.figureDataList.length; i++) {
-      if (this.figureDataList[i].item_id === item_id) {
-        delete this.figureDataList[i];
-      }
-    }
+    this.figureDataList.forEach((item, index) => {
+      item.item_id === item_id ? this.figureDataList.splice(index, 1) : '';
+    });
   }
 }
