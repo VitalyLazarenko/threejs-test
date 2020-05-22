@@ -16,7 +16,7 @@ export default class Viewer {
       1000
     );
 
-    this.randomSettings = {
+    this.randomCoordinatesLimits = {
       minX: -30,
       maxX: 30,
       minY: -17,
@@ -52,6 +52,41 @@ export default class Viewer {
     return newFigure;
   }
 
+  createRandomCordinates(Axis) {
+    switch (Axis) {
+      case 'x':
+        return (
+          Math.floor(
+            Math.random() *
+              (this.randomCoordinatesLimits.maxX -
+                this.randomCoordinatesLimits.minX +
+                1)
+          ) + this.randomCoordinatesLimits.minX
+        );
+      case 'y':
+        return (
+          Math.floor(
+            Math.random() *
+              (this.randomCoordinatesLimits.maxY -
+                this.randomCoordinatesLimits.minY +
+                1)
+          ) + this.randomCoordinatesLimits.minY
+        );
+      case 'z':
+        return (
+          Math.floor(
+            Math.random() *
+              (this.randomCoordinatesLimits.maxZ -
+                this.randomCoordinatesLimits.minZ +
+                1)
+          ) + this.randomCoordinatesLimits.minZ
+        );
+      default:
+        alert('Axis error, this axis is nit found!');
+        break;
+    }
+  }
+
   createBox(size) {
     const geometry = new THREE.BoxGeometry(size, size, size);
     const material = new THREE.MeshBasicMaterial({
@@ -61,21 +96,9 @@ export default class Viewer {
 
     const cube = new THREE.Mesh(geometry, material);
 
-    cube.position.x =
-      Math.floor(
-        Math.random() *
-          (this.randomSettings.maxX - this.randomSettings.minX + 1)
-      ) + this.randomSettings.minX;
-    cube.position.y =
-      Math.floor(
-        Math.random() *
-          (this.randomSettings.maxY - this.randomSettings.minY + 1)
-      ) + this.randomSettings.minY;
-    cube.position.z =
-      Math.floor(
-        Math.random() *
-          (this.randomSettings.maxZ - this.randomSettings.minZ + 1)
-      ) + this.randomSettings.minZ;
+    cube.position.x = this.createRandomCordinates('x');
+    cube.position.y = this.createRandomCordinates('y');
+    cube.position.z = this.createRandomCordinates('z');
 
     this.scene.add(cube);
 
@@ -95,21 +118,9 @@ export default class Viewer {
     });
     const sphere = new THREE.Mesh(geometry, material);
 
-    sphere.position.x =
-      Math.floor(
-        Math.random() *
-          (this.randomSettings.maxX - this.randomSettings.minX + 1)
-      ) + this.randomSettings.minX;
-    sphere.position.y =
-      Math.floor(
-        Math.random() *
-          (this.randomSettings.maxY - this.randomSettings.minY + 1)
-      ) + this.randomSettings.minY;
-    sphere.position.z =
-      Math.floor(
-        Math.random() *
-          (this.randomSettings.maxZ - this.randomSettings.minZ + 1)
-      ) + this.randomSettings.minZ;
+    sphere.position.x = this.createRandomCordinates('x');
+    sphere.position.y = this.createRandomCordinates('y');
+    sphere.position.z = this.createRandomCordinates('z');
 
     this.scene.add(sphere);
 
@@ -130,21 +141,9 @@ export default class Viewer {
 
     const pyramid = new THREE.Mesh(geometry, material);
 
-    pyramid.position.x =
-      Math.floor(
-        Math.random() *
-          (this.randomSettings.maxX - this.randomSettings.minX + 1)
-      ) + this.randomSettings.minX;
-    pyramid.position.y =
-      Math.floor(
-        Math.random() *
-          (this.randomSettings.maxY - this.randomSettings.minY + 1)
-      ) + this.randomSettings.minY;
-    pyramid.position.z =
-      Math.floor(
-        Math.random() *
-          (this.randomSettings.maxZ - this.randomSettings.minZ + 1)
-      ) + this.randomSettings.minZ;
+    pyramid.position.x = this.createRandomCordinates('x');
+    pyramid.position.y = this.createRandomCordinates('y');
+    pyramid.position.z = this.createRandomCordinates('z');
 
     this.scene.add(pyramid);
 
