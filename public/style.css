@@ -31,19 +31,56 @@ body {
   width: 1000px;
 }
 
-.list {
+.list-container {
   background-color: #fff;
 
   border: 2px solid black;
   border-radius: 5px;
 
-  width: 50vh;
+  width: 70vh;
   height: 90vh;
 
   display: flex;
+  flex-wrap: wrap;
   justify-content: center;
+  align-items: center;
+}
+
+.list {
+  padding-top: 0;
+
+  width: 70vh;
+  height: 80vh;
+}
+
+.list-name {
+  margin-top: 5px;
 }
 
 .list-item {
+  background-color: rgb(119, 135, 151);
+  color: #fff;
+
+  border-radius: 5px;
+
+  width: 60vh;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
   margin: 5px;
+}
+
+.title {
+  margin-left: 5px;
+}
+
+.delete {
+  margin-right: 1px;
+
+  background-color: rgb(248, 59, 59);
+  color: white;
+
+  border-radius: 5px;
 }
