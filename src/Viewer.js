@@ -17,12 +17,18 @@ export default class Viewer {
     );
 
     this.randomCoordinatesLimits = {
-      minX: -30,
-      maxX: 30,
-      minY: -17,
-      maxY: 17,
-      minZ: 30,
-      maxZ: -30,
+      x: {
+        min: -30,
+        max: 30,
+      },
+      y: {
+        min: -17,
+        max: 17,
+      },
+      z: {
+        min: -30,
+        max: 30,
+      },
     };
   }
 
@@ -79,39 +85,15 @@ export default class Viewer {
     };
   }
 
-  createRandomCordinates(Axis) {
-    switch (Axis) {
-      case 'x':
-        return (
-          Math.floor(
-            Math.random() *
-              (this.randomCoordinatesLimits.maxX -
-                this.randomCoordinatesLimits.minX +
-                1)
-          ) + this.randomCoordinatesLimits.minX
-        );
-      case 'y':
-        return (
-          Math.floor(
-            Math.random() *
-              (this.randomCoordinatesLimits.maxY -
-                this.randomCoordinatesLimits.minY +
-                1)
-          ) + this.randomCoordinatesLimits.minY
-        );
-      case 'z':
-        return (
-          Math.floor(
-            Math.random() *
-              (this.randomCoordinatesLimits.maxZ -
-                this.randomCoordinatesLimits.minZ +
-                1)
-          ) + this.randomCoordinatesLimits.minZ
-        );
-      default:
-        alert('Axis error, this axis is nit found!');
-        break;
-    }
+  generateRandomCordinate(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+
+  createRandomCordinates(axis) {
+    return this.generateRandomCordinate(
+      this.randomCoordinatesLimits[axis].min,
+      this.randomCoordinatesLimits[axis].max
+    );
   }
 
   deleteFigure({ uuid }) {

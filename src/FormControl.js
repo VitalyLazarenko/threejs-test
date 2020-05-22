@@ -8,7 +8,7 @@ export default class FormControl {
   }
 
   init() {
-    this.addFigure.addEventListener('click', this.addNewFigure.bind(this));
+    this.addFigure.addEventListener('click', () => this.addNewFigure());
   }
 
   addNewFigure() {
