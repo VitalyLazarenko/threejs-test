@@ -18,28 +18,60 @@ export default class FormControl {
     });
   }
 
-  addListItem({ item_id, uuid, name, size }) {
-    const label = document.createElement('label');
-    label.textContent = `${name.toUpperCase()}: ${size} : ${uuid}`;
-    label.className = 'title';
+  addListItem(data) {
+    const label = this.createListElement({
+      data: data,
+      elementName: 'label',
+      className: 'title',
+    });
 
-    const delButton = document.createElement('button');
-    delButton.className = 'delete';
-    delButton.textContent = 'delete';
-    delButton.id = 'delete';
-    delButton.setAttribute('item-id', item_id);
+    const delButton = this.createListElement({
+      data: data,
+      elementName: 'button',
+      className: 'delete',
+      text: 'delete',
+      id: 'delete',
+    });
 
-    const listItem = document.createElement('li');
-    listItem.className = 'list-item';
-    listItem.appendChild(label);
-    listItem.appendChild(delButton);
-    listItem.id = item_id;
+    const listItem = this.createListElement({
+      data: data,
+      elementName: 'li',
+      className: 'list-item',
+      childs: [label, delButton],
+    });
 
     this.bindEvent(listItem);
 
     this.listItems.appendChild(listItem);
 
     return listItem;
+  }
+
+  createListElement({ data, elementName, className, text, id, childs }) {
+    const element = document.createElement(elementName);
+    className !== '' ? (element.className = className) : '';
+
+    if (id) {
+      element.id = id;
+    } else {
+      if (className === 'list-item') {
+        element.id = data.item_id;
+      }
+    }
+
+    element.textContent =
+      className === 'title'
+        ? `${data.name.toUpperCase()}: ${data.size} : ${data.uuid}`
+        : text;
+    id === 'delete' ? element.setAttribute(`item-id`, data.item_id) : '';
+
+    if (childs) {
+      childs.forEach((child) => {
+        element.appendChild(child);
+      });
+    }
+
+    return element;
   }
 
   bindEvent(item) {

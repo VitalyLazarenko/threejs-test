@@ -7,7 +7,6 @@ export default class DataStorage {
     if (data === '') return alert('No data to add!');
 
     this.figureDataList.push(data);
-    console.log(this.figureDataList);
   }
 
   getAllItems() {
