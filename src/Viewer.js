@@ -36,6 +36,10 @@ export default class Viewer {
     this.scene.add(this.axesHelper);
     this.renderer.setSize(this.renderWidth, this.renderHeight);
     this.camera.position.z = 120;
+    this.controls = new THREE.OrbitControls(
+      this.camera,
+      this.renderer.domElement
+    );
     this._animate();
   }
 
@@ -111,5 +115,6 @@ export default class Viewer {
   _animate() {
     requestAnimationFrame(() => this._animate());
     this.renderer.render(this.scene, this.camera);
+    this.controls.update();
   }
 }
