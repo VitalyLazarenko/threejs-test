@@ -34,22 +34,49 @@ export default class Viewer {
   }
 
   createFigure(name, size) {
-    let newFigure;
+    let geometry;
+    let material;
     switch (name) {
       case 'Box':
-        newFigure = this.createBox(size);
+        geometry = new THREE.BoxGeometry(size, size, size);
+        material = new THREE.MeshBasicMaterial({
+          color: 0x00ff00,
+          wireframe: true,
+        });
         break;
       case 'Shpere':
-        newFigure = this.createSphere(size);
+        geometry = new THREE.SphereGeometry(size, 32, 32);
+        material = new THREE.MeshBasicMaterial({
+          color: 0x0000ff,
+          wireframe: true,
+        });
         break;
       case 'Pyramid':
-        newFigure = this.createPyramid(size);
+        geometry = new THREE.CylinderGeometry(0, size, size, 4);
+        material = new THREE.MeshBasicMaterial({
+          color: 0xff0000,
+          wireframe: true,
+        });
         break;
       default:
         alert('Something went wrong! :D');
         break;
     }
-    return newFigure;
+
+    const figure = new THREE.Mesh(geometry, material);
+
+    figure.position.x = this.createRandomCordinates('x');
+    figure.position.y = this.createRandomCordinates('y');
+    figure.position.z = this.createRandomCordinates('z');
+
+    this.scene.add(figure);
+
+    return {
+      item_id: String(Date.now()),
+      uuid: figure.uuid,
+      name: name,
+      size: size,
+    };
   }
 
   createRandomCordinates(Axis) {
@@ -85,74 +112,6 @@ export default class Viewer {
         alert('Axis error, this axis is nit found!');
         break;
     }
-  }
-
-  createBox(size) {
-    const geometry = new THREE.BoxGeometry(size, size, size);
-    const material = new THREE.MeshBasicMaterial({
-      color: 0x00ff00,
-      wireframe: true,
-    });
-
-    const cube = new THREE.Mesh(geometry, material);
-
-    cube.position.x = this.createRandomCordinates('x');
-    cube.position.y = this.createRandomCordinates('y');
-    cube.position.z = this.createRandomCordinates('z');
-
-    this.scene.add(cube);
-
-    return {
-      item_id: String(Date.now()),
-      uuid: cube.uuid,
-      name: 'Box',
-      size: size,
-    };
-  }
-
-  createSphere(size) {
-    const geometry = new THREE.SphereGeometry(size, 32, 32);
-    const material = new THREE.MeshBasicMaterial({
-      color: 0x0000ff,
-      wireframe: true,
-    });
-    const sphere = new THREE.Mesh(geometry, material);
-
-    sphere.position.x = this.createRandomCordinates('x');
-    sphere.position.y = this.createRandomCordinates('y');
-    sphere.position.z = this.createRandomCordinates('z');
-
-    this.scene.add(sphere);
-
-    return {
-      item_id: String(Date.now()),
-      uuid: sphere.uuid,
-      name: 'sphere',
-      size: size,
-    };
-  }
-
-  createPyramid(size) {
-    const geometry = new THREE.CylinderGeometry(0, size, size, 4);
-    const material = new THREE.MeshBasicMaterial({
-      color: 0xff0000,
-      wireframe: true,
-    });
-
-    const pyramid = new THREE.Mesh(geometry, material);
-
-    pyramid.position.x = this.createRandomCordinates('x');
-    pyramid.position.y = this.createRandomCordinates('y');
-    pyramid.position.z = this.createRandomCordinates('z');
-
-    this.scene.add(pyramid);
-
-    return {
-      item_id: String(Date.now()),
-      uuid: pyramid.uuid,
-      name: 'piramid',
-      size: size,
-    };
   }
 
   deleteFigure({ uuid }) {
